@@ -1,7 +1,7 @@
-//your JS code here. If required.
-const inputs = document.querySelectorAll(".code");
+const inputs = Array.from({ length: 6 }, (_, i) =>
+  document.getElementById(`code-${i + 1}`)
+);
 
-// Auto-focus first input
 inputs[0].focus();
 
 inputs.forEach((input, index) => {
@@ -9,12 +9,8 @@ inputs.forEach((input, index) => {
     const value = e.target.value;
 
     if (/^\d$/.test(value)) {
-      // Move to next field
-      if (index < inputs.length - 1) {
-        inputs[index + 1].focus();
-      }
+      if (index < 5) inputs[index + 1].focus();
     } else {
-      // Clear invalid input
       e.target.value = "";
     }
   });
@@ -24,13 +20,11 @@ inputs.forEach((input, index) => {
       e.preventDefault();
 
       if (input.value === "") {
-        // Move focus back
         if (index > 0) {
           inputs[index - 1].value = "";
           inputs[index - 1].focus();
         }
       } else {
-        // Clear current field
         input.value = "";
       }
     }
